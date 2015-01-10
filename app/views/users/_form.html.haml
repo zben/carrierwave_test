@@ -1,0 +1,20 @@
+= form_for @user, html: {multipart: true} do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name, placeholder: "please blank to test image caching"
+    %br
+    =f.fields_for :photo do |photo|
+      =photo.file_field :image
+      =photo.hidden_field :image_cache
+      -if photo.object.image
+        =image_tag photo.object.image.url
+
+  .actions
+    = f.submit 'Save'
