@@ -10,9 +10,11 @@
     = f.label :name
     = f.text_field :name, placeholder: "please blank to test image caching"
     %br
-    =f.fields_for :photo do |photo|
+    =f.fields_for :photos do |photo|
+      %br
       =photo.file_field :image
       =photo.hidden_field :image_cache
+
       -if photo.object.image
         =image_tag photo.object.image.url
 

@@ -3,7 +3,8 @@
 %p
   %b Name:
   = @user.name
-  =image_tag @user.photo.image.url
+  -@user.photos.each do |photo|
+    =image_tag photo.image.url
 
 = link_to 'Edit', edit_user_path(@user)
 \|
